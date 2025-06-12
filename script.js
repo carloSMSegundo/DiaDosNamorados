@@ -6,6 +6,9 @@ const mainContent = document.getElementById('mainContent');
 const message = document.getElementById('message');
 const heartsContainer = document.getElementById('hearts');
 
+// Bloqueia rolagem durante a tela inicial
+document.body.classList.add('block-scroll');
+
 // Criar corações flutuantes
 function createHearts() {
     const heartCount = 30;
@@ -26,19 +29,26 @@ function createHearts() {
 
 // Fazer o botão "Não" fugir
 function moveButton() {
-    const x = Math.random() * (window.innerWidth - btnNo.offsetWidth - 40) + 20;
-    const y = Math.random() * (window.innerHeight - btnNo.offsetHeight - 40) + 20;
-    
-    btnNo.style.position = 'absolute';
-    btnNo.style.left = x + 'px';
-    btnNo.style.top = y + 'px';
-    
+    const buttonWidth = btnNo.offsetWidth;
+    const buttonHeight = btnNo.offsetHeight;
+
+    const maxX = Math.max(0, window.innerWidth - buttonWidth - 20); // margem de segurança
+    const maxY = Math.max(0, window.innerHeight - buttonHeight - 20);
+
+    const x = Math.floor(Math.random() * maxX);
+    const y = Math.floor(Math.random() * maxY);
+
+    btnNo.style.position = 'fixed'; // garante que seja relativo à viewport
+    btnNo.style.left = `${x}px`;
+    btnNo.style.top = `${y}px`;
+
     // Adicionar animação de tremor
     btnNo.style.animation = 'shake 0.5s';
     setTimeout(() => {
         btnNo.style.animation = '';
     }, 500);
 }
+
 
 // Configurar eventos
 btnYes.addEventListener('click', function() {
@@ -52,6 +62,9 @@ btnYes.addEventListener('click', function() {
     setTimeout(() => {
         questionScreen.style.display = 'none';
         mainContent.style.display = 'block';
+        mainContent.style.opacity = '1';
+
+        document.body.classList.remove('block-scroll');
         
         // Iniciar a página principal
         initMainPage();
