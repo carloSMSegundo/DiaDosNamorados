@@ -107,6 +107,7 @@ h1::after {
     gap: 20px;
     margin-top: 30px;
     flex-wrap: wrap;
+    
 }
 
 .btn {
@@ -412,4 +413,7 @@ body.block-scroll {
 
 #btnNo {
     transition: top 0.3s ease, left 0.3s ease;
+    z-index: 9999;
 }
+
+

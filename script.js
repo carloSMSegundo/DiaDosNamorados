@@ -27,28 +27,37 @@ function createHearts() {
     }
 }
 
-// Fazer o botão "Não" fugir
+// Função otimizada para mover o botão "Não"
 function moveButton() {
-    const buttonWidth = btnNo.offsetWidth;
-    const buttonHeight = btnNo.offsetHeight;
-
-    const maxX = Math.max(0, window.innerWidth - buttonWidth - 20); // margem de segurança
-    const maxY = Math.max(0, window.innerHeight - buttonHeight - 20);
-
-    const x = Math.floor(Math.random() * maxX);
-    const y = Math.floor(Math.random() * maxY);
-
-    btnNo.style.position = 'fixed'; // garante que seja relativo à viewport
-    btnNo.style.left = `${x}px`;
-    btnNo.style.top = `${y}px`;
-
-    // Adicionar animação de tremor
-    btnNo.style.animation = 'shake 0.5s';
+    const buttonRect = btnNo.getBoundingClientRect();
+    const containerRect = questionScreen.getBoundingClientRect();
+    
+    // Margem de segurança
+    const margin = 20;
+    
+    // Área segura para posicionamento
+    const safeArea = {
+        left: containerRect.left + margin,
+        top: containerRect.top + margin,
+        right: containerRect.right - buttonRect.width - margin,
+        bottom: containerRect.bottom - buttonRect.height - margin
+    };
+    
+    // Nova posição aleatória dentro da área segura
+    const newX = Math.random() * (safeArea.right - safeArea.left) + safeArea.left;
+    const newY = Math.random() * (safeArea.bottom - safeArea.top) + safeArea.top;
+    
+    // Aplicar nova posição
+    btnNo.style.position = 'absolute';
+    btnNo.style.left = `${newX - containerRect.left}px`;
+    btnNo.style.top = `${newY - containerRect.top}px`;
+    
+    // Animação de tremor
+    btnNo.style.animation = 'shake 0.3s';
     setTimeout(() => {
         btnNo.style.animation = '';
-    }, 500);
+    }, 300);
 }
-
 
 // Configurar eventos
 btnYes.addEventListener('click', function() {
@@ -71,30 +80,13 @@ btnYes.addEventListener('click', function() {
     }, 800);
 });
 
-btnNo.addEventListener('mouseover', () => {
-  const x = Math.random() * 500;
-  const y = Math.random() * 500;
-  btnNo.style.position = 'absolute';
-  btnNo.style.left = `${x}px`;
-  btnNo.style.top = `${y}px`;
+// Eventos unificados para mouse e touch
+['mouseover', 'touchstart', 'click'].forEach(event => {
+    btnNo.addEventListener(event, function(e) {
+        e.preventDefault();
+        moveButton();
+    });
 });
-
-btnNo.addEventListener('touchstart', () => {
-  const x = Math.random() * 500;
-  const y = Math.random() * 500;
-  btnNo.style.position = 'absolute';
-  btnNo.style.left = `${x}px`;
-  btnNo.style.top = `${y}px`;
-});
-
-btnNo.addEventListener('click', () => {
-  const x = Math.random() * 500;
-  const y = Math.random() * 500;
-  btnNo.style.position = 'absolute';
-  btnNo.style.left = `${x}px`;
-  btnNo.style.top = `${y}px`;
-});
-
 
 // ========== Configuração da página principal ==========
 function initMainPage() {
@@ -102,14 +94,14 @@ function initMainPage() {
     const startDate = new Date('2020-07-13T00:00:00');
     
     // URLs das fotos para o carrossel (substitua por suas próprias URLs)
-const photos = [
-    'images/foto_1.jpg',
-    'images/foto_2.jpg',
-    'images/foto_3.jpg',
-    'images/foto_4.jpg',
-    'images/foto_5.jpg',
-    'images/foto_6.jpg'
-];
+    const photos = [
+        'images/foto_1.jpg',
+        'images/foto_2.jpg',
+        'images/foto_3.jpg',
+        'images/foto_4.jpg',
+        'images/foto_5.jpg',
+        'images/foto_6.jpg'
+    ];
     
     // Configuração do carrossel
     let currentIndex = 0;
