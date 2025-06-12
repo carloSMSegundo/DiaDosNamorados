@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="ICON/favicon.ico" type="image/x-icon">
+    <title>Bianca e Segundo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Tela inicial com a pergunta -->
+    <div class="question-container" id="questionScreen">
+        <h1>Você me ama? ❤️</h1>
+        <div class="buttons">
+            <button class="btn btn-yes" id="btnYes">
+                <i class="fas fa-heart"></i> Sim
+            </button>
+            <button class="btn btn-no" id="btnNo">
+                <i class="fas fa-times"></i> Não
+            </button>
+        </div>
+        <div class="message" id="message">
+            Eu sabia que você me amava! ❤️
+        </div>
+    </div>
+    
+    <!-- Corações flutuantes -->
+    <div class="hearts" id="hearts"></div>
+    
+    <!-- Tela principal (inicialmente oculta) -->
+    <div class="main-content" id="mainContent">
+        <div class="floating-heart">❤</div>
+        
+        <div class="scroll-container">
+            <div class="container">
+                <div class="header">
+                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2qhASBzpbFhPRtrnZ5lLnz?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                
+                <div class="carousel-container">
+                    <div class="carousel" id="carousel">
+                        <!-- As fotos serão adicionadas dinamicamente via JavaScript -->
+                    </div>
+                    <button class="carousel-nav prev">❮</button>
+                    <button class="carousel-nav next">❯</button>
+                    <div class="carousel-indicators" id="indicators"></div>
+                </div>
+                
+                <div class="counter-container">
+                    <div class="counter-text">💖Eu te amo há:</div>
+                    <div class="timer" id="timer">0 anos, 0 dias, 0 horas, 0 minutos e 0 segundos</div>
+                </div>
+
+                <div class="love-message">
+                    <p>Meu bem,não sou muito bom em expressar o que sinto em palavras e acabo demonstrando através de brincadeiras — daquelas em que te perturbo até você ficar com raiva de mim. Mas saiba que, a cada dia que passa, meu coração se enche ainda mais de carinho e admiração por você. Seu sorriso ilumina o meu mundo, e cada abraço seu me faz sentir que estou exatamente onde deveria estar. Você é o motivo de eu dar tudo de mim, e tudo ao seu lado se torna mais bonito e agradável. Eu te amo, meu bem. 😊
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
